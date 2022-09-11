@@ -1,1 +1,702 @@
-print("Hello world!")
+if game.PlaceId == 6206893534 then
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+local Window = OrionLib:MakeWindow({Name = "stat checker(cobra kai)", HidePremium = false, SaveConfig = true, ConfigFolder = "OrionTest"})
+
+--Globals
+LP = game.Players.LocalPlayer
+
+local MainTab = Window:MakeTab({
+	Name = "Main",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+local MainSection = MainTab:AddSection({
+	Name = "Player"
+})
+
+MainTab:AddSlider({
+	Name = "Walkspeed",
+	Min = 0,
+	Max = 1000,
+	Default = 16,
+	Color = Color3.fromRGB(255,255,255),
+	Increment = 1,
+	ValueName = "speed",
+	Callback = function(v)
+		game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = v
+	end    
+})
+
+MainTab:AddSlider({
+	Name = "Jumppower",
+	Min = 0,
+	Max = 500,
+	Default = 50,
+	Color = Color3.fromRGB(255,255,255),
+	Increment = 1,
+	ValueName = "power",
+	Callback = function(v)
+		game.Players.LocalPlayer.Character.Humanoid.JumpPower = v
+	end    
+})
+
+local MainSection = MainTab:AddSection({
+	Name = "Fun Stuff :)"
+})
+
+MainTab:AddButton({
+	Name = "Stun",
+	Callback = function(v)
+        LP.Character.HumanoidRootPart:Destroy()
+  	end    
+})
+
+MainTab:AddButton({
+	Name = "Respawn",
+	Callback = function(v)
+        LP.Character.Humanoid:Destroy()
+  	end    
+})
+
+MainTab:AddButton({
+	Name = "Hide Dojo",
+	Callback = function(v)
+        LP.Character.Head.PlayerHeader.PlayerDojo:Destroy()
+  	end    
+})
+
+MainTab:AddButton({
+	Name = "Hide Name",
+	Callback = function(v)
+        LP.Character.Head.PlayerHeader.PlayerName:Destroy()
+  	end    
+})
+
+MainTab:AddButton({
+	Name = "Hide Health Bar",
+	Callback = function(v)
+        LP.Character.Head.PlayerHeader.Health:Destroy()
+  	end    
+})
+
+MainTab:AddButton({
+	Name = "Hide Belt",
+	Callback = function(v)
+        LP.Character.Head.PlayerHeader.Belt:Destroy()
+  	end    
+})
+
+MainTab:AddButton({
+	Name = "Hide All",
+	Callback = function(v)
+        LP.Character.Head.PlayerHeader:Destroy()
+  	end    
+})
+
+local AutoFarmTab = Window:MakeTab({
+	Name = "Auto Farm",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+local MainSection = AutoFarmTab:AddSection({
+	Name = "Auto Farm(no gamepass)"
+})
+
+AutoFarmTab:AddToggle({
+	Name = "Auto Push Up",
+	Default = false,
+	Callback = function(v)
+		getgenv().autopushup = v
+		while true do 
+			if not getgenv().autopushup then return end
+			local Event = game:GetService("ReplicatedStorage").Remotes.PushUp
+			Event:FireServer()
+			wait()
+		end
+	end    
+})
+
+AutoFarmTab:AddToggle({
+	Name = "Auto Sit Up",
+	Default = false,
+	Callback = function(v)
+		getgenv().autositup = v
+		while true do 
+			if not getgenv().autositup then return end
+			local Event = game:GetService("ReplicatedStorage").Remotes.SitUp
+			Event:FireServer()
+			wait()
+		end
+	end    
+})
+
+AutoFarmTab:AddToggle({
+	Name = "Auto Strength(stand on top of bag)",
+	Default = false,
+	Callback = function(v)
+		getgenv().autostrength = v
+		while true do
+			if not getgenv().autostrength then return end
+			local Event = game:GetService("ReplicatedStorage").Remotes.DoubleReg
+			Event:FireServer()
+			wait()
+		end
+	end    
+})
+
+local MainSection = AutoFarmTab:AddSection({
+	Name = "Auto Farm (gamepass)"
+})
+
+AutoFarmTab:AddToggle({
+	Name = "Auto Dumbell",
+	Default = false,
+	Callback = function(v)
+		getgenv().autodumbell = v
+		while true do
+			if not getgenv().autodumbell then return end
+			local A_1 = "Rep"
+			local A_2 = 2
+			local Event = game:GetService("ReplicatedStorage").Remotes.Dumbell
+			Event:FireServer(A_1, A_2)
+			wait(1)
+		end
+	end    
+})
+
+AutoFarmTab:AddToggle({
+	Name = "Auto Bench",
+	Default = false,
+	Callback = function(v)
+		getgenv().autobench = v
+		while true do
+			if not getgenv().autobench then return end
+			local Event = game:GetService("ReplicatedStorage").Remotes.Bench
+			Event:FireServer()
+			wait()      
+		end
+        MouseButton1Click:Connect(function()
+            OrionLib:MakeNotification({
+                Name = "Take Note",
+                Content = "turn on auto push up or sit up and bench to get fast hp!",
+                Image = "rbxassetid://4483345998",
+                Time = 8
+            })
+        end)
+	end    
+})
+
+AutoFarmTab:AddToggle({
+	Name = "Auto Katana",
+	Default = false,
+	Callback = function(v)
+		getgenv().autokatana = v
+		while true do
+			if not getgenv().autokatana then return end
+			local A_1 = 2
+			local Event = game:GetService("ReplicatedStorage").Katana
+			Event:FireServer(A_1)
+			wait()
+		end
+	end    
+})
+
+local StickBagTab = Window:MakeTab({
+	Name = "Stick Bag",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+local MainSection = StickBagTab:AddSection({
+	Name = "Stick on top of any bag"
+})
+
+StickBagTab:AddToggle({
+	Name = "Red Bag",
+	Default = false,
+	Callback = function(v)
+		getgenv().autoblackbag = v
+		while true do
+			if not getgenv().autoblackbag then return end
+			game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(97.808876, 9.85557461, 75.6152191, 0.0428906791, -8.49579962e-09, 0.999079764, -4.77750959e-08, 1, 1.05546185e-08, -0.999079764, -4.81838285e-08, 0.0428906791)
+			wait()
+		end
+	end    
+})
+
+StickBagTab:AddToggle({
+	Name = "Red Bag 2",
+	Default = false,
+	Callback = function(v)
+		getgenv().autoblackbag = v
+		while true do
+			if not getgenv().autoblackbag then return end
+			game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(97.4920044, 9.8531332, 71.209053, 0.00582391582, 2.44263365e-08, 0.999983013, -2.72469158e-08, 1, -2.42680631e-08, -0.999983013, -2.71051181e-08, 0.00582391582)
+			wait()
+		end
+	end    
+})
+
+StickBagTab:AddToggle({
+	Name = "Red Bag 3",
+	Default = false,
+	Callback = function(v)
+		getgenv().autoblackbag = v
+		while true do
+			if not getgenv().autoblackbag then return end
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(97.8537292, 9.85480976, 66.1067047, -0.0675907806, -9.69354641e-09, 0.997713149, -2.8562182e-08, 1, 7.7808e-09, -0.997713149, -2.79709536e-08, -0.0675907806)
+			wait()
+		end
+	end    
+})
+
+StickBagTab:AddToggle({
+	Name = "Black Bag 1.0",
+	Default = false,
+	Callback = function(v)
+		getgenv().autoblackbag = v
+		while true do
+			if not getgenv().autoblackbag then return end
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(64.0134048, 9.83089066, 68.708313, -0.00362722878, 7.91136685e-08, 0.999993443, 2.4022734e-08, 1, -7.90270533e-08, -0.999993443, 2.3735927e-08, -0.00362722878)
+			wait()
+		end
+	end    
+})
+
+StickBagTab:AddToggle({
+	Name = "Black Bag 2.0",
+	Default = false,
+	Callback = function(v)
+		getgenv().autoblackbag = v
+		while true do
+			if not getgenv().autoblackbag then return end
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(64.163353, 9.81847668, 15.9393969, -0.00944456644, 9.08348774e-09, 0.999955416, -3.69445381e-08, 1, -9.43283407e-09, -0.999955416, -3.70319775e-08, -0.00944456644)
+			wait()
+		end
+	end    
+})
+
+StickBagTab:AddToggle({
+	Name = "Black Bag",
+	Default = false,
+	Callback = function(v)
+		getgenv().autoblackbag = v
+		while true do
+			if not getgenv().autoblackbag then return end
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(56.3307877, 9.82232189, -27.4355011, 0.0140739493, -6.54082868e-08, 0.999900937, 4.88122112e-08, 1, 6.47277147e-08, -0.999900937, 4.78963997e-08, 0.0140739493)
+			wait()
+		end
+	end    
+})
+
+StickBagTab:AddToggle({
+	Name = "Black Bag 2",
+	Default = false,
+	Callback = function(v)
+		getgenv().autoblackbag = v
+		while true do
+			if not getgenv().autoblackbag then return end
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(55.8360329, 9.82807827, -37.553669, -0.000540965702, -3.13135793e-08, 0.999999881, 2.20639507e-08, 1, 3.132552e-08, -0.999999881, 2.20808936e-08, -0.000540965702)
+			wait()
+		end
+	end    
+})
+
+StickBagTab:AddToggle({
+	Name = "Black Bag 3",
+	Default = false,
+	Callback = function(v)
+		getgenv().autoblackbag = v
+		while true do
+			if not getgenv().autoblackbag then return end
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(56.1942482, 9.81063557, -46.8126717, 0.0779897422, -8.96995811e-09, 0.996954143, -1.22244028e-08, 1, 9.9536539e-09, -0.996954143, -1.29634516e-08, 0.0779897422)
+			wait()
+		end
+	end    
+})
+
+StickBagTab:AddToggle({
+	Name = "Black Bag 4",
+	Default = false,
+	Callback = function(v)
+		getgenv().autoblackbag = v
+		while true do
+			if not getgenv().autoblackbag then return end
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(56.2983131, 9.81261826, -56.9600487, 0.106951006, 3.97697448e-08, 0.994264305, 1.51783759e-08, 1, -4.16318748e-08, -0.994264305, 1.95438883e-08, 0.106951006)
+			wait()
+		end
+	end    
+})
+
+StickBagTab:AddToggle({
+	Name = "Black Bag 5",
+	Default = false,
+	Callback = function(v)
+		getgenv().autoblackbag = v
+		while true do
+			if not getgenv().autoblackbag then return end
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(55.8267288, 9.81579781, -66.8930817, -0.0963141322, -5.73566226e-08, 0.995351017, -9.64997593e-09, 1, 5.66907516e-08, -0.995351017, -4.14499279e-09, -0.0963141322)
+			wait()
+		end
+	end    
+})
+
+StickBagTab:AddToggle({
+	Name = "Black Bag 6",
+	Default = false,
+	Callback = function(v)
+		getgenv().autoblackbag = v
+		while true do
+			if not getgenv().autoblackbag then return end
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(4.42928696, 9.81770229, -66.8989716, -0.0779876038, 4.14090984e-09, -0.996954322, 6.84237067e-09, 1, 3.61830965e-09, 0.996954322, -6.53934773e-09, -0.0779876038)
+			wait()
+		end
+	end    
+})
+
+StickBagTab:AddToggle({
+	Name = "Black Bag 7",
+	Default = false,
+	Callback = function(v)
+		getgenv().autoblackbag = v
+		while true do
+			if not getgenv().autoblackbag then return end
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(4.41697979, 9.8250351, -57.532814, -0.0605762787, -1.33265745e-08, -0.998163581, 3.32759598e-08, 1, -1.53705351e-08, 0.998163581, -3.41459376e-08, -0.0605762787)
+			wait()
+		end
+	end    
+})
+
+StickBagTab:AddToggle({
+	Name = "Black Bag 8",
+	Default = false,
+	Callback = function(v)
+		getgenv().autoblackbag = v
+		while true do
+			if not getgenv().autoblackbag then return end
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(5.15032911, 9.82865334, -47.7111359, 0.0263267402, -1.13432101e-07, -0.999653399, -1.73549903e-08, 1, -1.13928486e-07, 0.999653399, 2.03483399e-08, 0.0263267402)
+			wait()
+		end
+	end    
+})
+
+StickBagTab:AddToggle({
+	Name = "Black Bag 9",
+	Default = false,
+	Callback = function(v)
+		getgenv().autoblackbag = v
+		while true do
+			if not getgenv().autoblackbag then return end
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(4.10268402, 9.81972027, -36.8863487, 0.0499049947, -2.24744875e-10, -0.998753965, -2.04100709e-10, 1, -2.35223618e-10, 0.998753965, 2.15585216e-10, 0.0499049947)
+			wait()
+		end
+	end    
+})
+
+StickBagTab:AddToggle({
+	Name = "Black Bag 10",
+	Default = false,
+	Callback = function(v)
+		getgenv().autoblackbag = v
+		while true do
+			if not getgenv().autoblackbag then return end
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(5.00528669, 9.82517242, -27.4557819, -0.0198858157, 5.50249588e-08, -0.999802232, -7.8526341e-09, 1, 5.51920287e-08, 0.999802232, 8.94861962e-09, -0.0198858157)
+			wait()
+		end
+	end    
+})
+
+local tpTab = Window:MakeTab({
+	Name = "Teleport",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+local MainSection = tpTab:AddSection({
+	Name = "Teleporting....."
+})
+
+tpTab:AddButton({
+	Name = "Safe Zone",
+	Callback = function(v)
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(86.1433258, 3.40000033, 62.739399, 0.991300523, -2.61786204e-10, -0.131618053, 2.08864565e-10, 1, -4.158901e-10, 0.131618053, 3.84781734e-10, 0.991300523)
+  	end    
+})
+
+tpTab:AddButton({
+	Name = "Cobra Kai Dojo",
+	Callback = function(v)
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(24.3644619, 3.26012897, 77.408577, 0.999732137, 7.71989406e-09, 0.023143677, -6.06736661e-09, 1, -7.14731883e-08, -0.023143677, 7.13136217e-08, 0.999732137)
+    end    
+})
+
+tpTab:AddButton({
+	Name = "Cobra Kai Dojo empty room",
+	Callback = function(v)
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(36.5608253, 3.28300476, -7.6343255, -0.0582688227, -5.41019363e-09, -0.99830091, -4.39468728e-08, 1, -2.85431057e-09, 0.99830091, 4.37058851e-08, -0.0582688227)
+    end    
+})
+
+tpTab:AddButton({
+	Name = "Cobra Kai Dojo 2.0",
+	Callback = function(v)
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(29.8183975, 3.25385451, -19.9773006, 0.999811888, -7.8858795e-09, 0.019395072, 7.9467295e-09, 1, -3.06032888e-09, -0.019395072, 3.2138805e-09, 0.999811888)
+    end    
+})
+
+tpTab:AddButton({
+	Name = "Cobra Kai Dojo office",
+	Callback = function(v)
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(22.0610237, 3.2638545, 6.60392094, 0.973861098, -6.84946997e-08, -0.227144346, 5.61829623e-08, 1, -6.06676025e-08, 0.227144346, 4.63201744e-08, 0.973861098)
+    end    
+})
+
+tpTab:AddButton({
+	Name = "Teleport Door",
+	Callback = function(v)
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(96.1069412, 3.20007181, 163.755341, -0.125860646, 4.30841887e-08, -0.992047906, 3.35626176e-08, 1, 3.91714714e-08, 0.992047906, -2.83655801e-08, -0.125860646)
+    end    
+})
+
+tpTab:AddButton({
+	Name = "All Valley",
+	Callback = function(v)
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(53.3795815, 3.19998646, 255.342041, -0.71467942, 1.74269099e-09, -0.699452162, -2.88365415e-10, 1, 2.78615153e-09, 0.699452162, 2.19290297e-09, -0.71467942)
+    end    
+})
+
+tpTab:AddButton({
+	Name = "Fighting Ring Place",
+	Callback = function(v)
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-29.7108974, 2.89999914, 78.1261139, 1, 8.04777933e-09, -0.000122898069, -8.03603672e-09, 1, 9.55454738e-08, 0.000122898069, -9.55444861e-08, 1)
+    end    
+})
+
+tpTab:AddButton({
+	Name = "Pawn Shop",
+	Callback = function(v)
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-59.8646584, 3.42875648, 167.270584, 0.743234158, 9.84399673e-10, 0.669031322, -4.39656134e-09, 1, 3.41280737e-09, -0.669031322, -5.47795276e-09, 0.743234158)
+    end    
+})
+
+tpTab:AddButton({
+	Name = "Dojo 1",
+	Callback = function(v)
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-157.304199, 3.42875648, 186.155014, 0.999726117, 7.86290357e-08, -0.0234015565, -7.71179955e-08, 1, 6.54725056e-08, 0.0234015565, -6.36498996e-08, 0.999726117)
+    end    
+})
+
+tpTab:AddButton({
+	Name = "Dojo 2",
+	Callback = function(v)
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-260.717865, 3.42875648, 184.51416, 0.999982297, 2.76471415e-08, -0.00594747486, -2.74639387e-08, 1, 3.08850012e-08, 0.00594747486, -3.0721111e-08, 0.999982297)
+    end    
+})
+
+tpTab:AddButton({
+	Name = "Dojo 3",
+	Callback = function(v)
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-363.738373, 3.42875648, 184.378967, 0.999395013, 2.35325661e-08, 0.0347791314, -2.03979411e-08, 1, -9.04842921e-08, -0.0347791314, 8.97201247e-08, 0.999395013)
+    end    
+})
+
+tpTab:AddButton({
+	Name = "Dojo 1.0 (near safe zone)",
+	Callback = function(v)
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(109.350807, 3.42875648, -130.204163, 0.0814797357, -3.73555231e-08, 0.996675014, -3.54289287e-09, 1, 3.77697802e-08, -0.996675014, -6.60858435e-09, 0.0814797357)
+    end    
+})
+
+tpTab:AddButton({
+	Name = "Dojo 2.0 (near safe zone)",
+	Callback = function(v)
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(107.364326, 3.42875648, -234.507462, -0.0115134353, -9.94058382e-08, 0.99993372, -2.42892604e-08, 1, 9.91327624e-08, -0.99993372, -2.3146292e-08, -0.0115134353)
+    end    
+})
+
+tpTab:AddButton({
+	Name = "Dojo 3.0 (near safe zone)",
+	Callback = function(v)
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(106.295906, 3.42875648, -337.450256, 0.00593982916, 2.82684027e-08, 0.999982357, 1.90861034e-08, 1, -2.83822725e-08, -0.999982357, 1.92543528e-08, 0.00593982916)
+    end    
+})
+
+tpTab:AddButton({
+	Name = "Miyagi Do",
+	Callback = function(v)
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-73.3218384, 2.799999, -942.737915, 0.999580801, 9.77003634e-09, 0.0289529674, -9.39361655e-09, 1, -1.31371056e-08, -0.0289529674, 1.28596254e-08, 0.999580801)
+    end    
+})
+
+tpTab:AddButton({
+	Name = "Miyagi Do House",
+	Callback = function(v)
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-37.3229256, 5.40000296, -1008.70032, 0.0471299253, 2.52055781e-08, 0.998888791, -3.51062148e-08, 1, -2.35772255e-08, -0.998888791, -3.39560131e-08, 0.0471299253)
+    end    
+})
+
+tpTab:AddButton({
+	Name = "Miyagi Do House Outside",
+	Callback = function(v)
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-60.9242172, 2.69999909, -1056.80408, 0.980823219, -3.18751354e-08, -0.194899395, 1.64313949e-08, 1, -8.08562888e-08, 0.194899395, 7.61032553e-08, 0.980823219)
+    end    
+})
+
+tpTab:AddButton({
+	Name = "Miyagi Do House Outside 2.0",
+	Callback = function(v)
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-110.764809, 3.09986901, -1050.86243, 0.996182263, 1.17142278e-08, -0.0872980729, -2.05056261e-09, 1, 1.10787028e-07, 0.0872980729, -1.10185063e-07, 0.996182263)
+    end    
+})
+
+tpTab:AddButton({
+	Name = "Miyagi Do Water Balance",
+	Callback = function(v)
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-48.6564941, 2.3666594, -1111.73462, -0.997639596, 4.94328312e-08, -0.0686677024, 4.71744031e-08, 1, 3.45108688e-08, 0.0686677024, 3.11900479e-08, -0.997639596)
+    end    
+})
+
+tpTab:AddButton({
+	Name = "Miyagi Do House Roof",
+	Callback = function(v)
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-54.5286713, 17.8071537, -1021.94434, 0.999846041, 5.76741144e-08, -0.0175452977, -5.75852503e-08, 1, 5.570016e-09, 0.0175452977, -4.55880844e-09, 0.999846041)
+    end    
+})
+
+tpTab:AddButton({
+	Name = "Middle of whole map",
+	Callback = function(v)
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-80.3309402, 2.69999909, -615.249451, -0.986778021, -1.23796084e-08, -0.162077621, -2.52063295e-08, 1, 7.70830795e-08, 0.162077621, 8.01492703e-08, -0.986778021)
+    end    
+})
+
+tpTab:AddButton({
+	Name = "Secret Place",
+	Callback = function(v)
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(84.6197662, 3.39999914, 19.3360329, -0.999849439, -2.86357538e-09, -0.0173506495, -2.93520475e-09, 1, 4.10287537e-09, 0.0173506495, 4.15318535e-09, -0.999849439)
+    end    
+})
+
+tpTab:AddButton({
+	Name = "Corner Of Whole Map",
+	Callback = function(v)
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-560.475098, 2.69999909, 499.359772, 0.719349325, 2.96258076e-08, -0.694648504, -1.98683594e-08, 1, 2.20737757e-08, 0.694648504, -2.0772295e-09, 0.719349325)
+    end    
+})
+
+tpTab:AddButton({
+	Name = "Corner Of Whole Map 2",
+	Callback = function(v)
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(499.718628, 2.69999909, 499.396606, 0.690445364, 1.6193884e-09, 0.723384559, -1.02953834e-09, 1, -1.25596877e-09, -0.723384559, 1.22425708e-10, 0.690445364)
+    end    
+})
+
+tpTab:AddButton({
+	Name = "Corner Of Whole Map 3",
+	Callback = function(v)
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(499.913147, 2.69999909, -1350.59497, -0.787972927, -7.80825147e-08, 0.615709841, -4.82636224e-08, 1, 6.50502585e-08, -0.615709841, 2.15414566e-08, -0.787972927)
+    end    
+})
+
+tpTab:AddButton({
+	Name = "Corner Of Whole Map 4",
+	Callback = function(v)
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-499.063934, 2.69999933, -1350.3186, -0.747083783, -2.59642938e-08, -0.664729893, 5.21236778e-08, 1, -9.76412338e-08, 0.664729893, -1.07594353e-07, -0.747083783)
+    end    
+})
+
+local ScriptsTab = Window:MakeTab({
+	Name = "Scripts",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+ScriptsTab:AddButton({
+	Name = "Anti AFK",
+	Callback = function(v)
+        wait(0.5)local ba=Instance.new("ScreenGui")
+        local ca=Instance.new("TextLabel")local da=Instance.new("Frame")
+        local _b=Instance.new("TextLabel")local ab=Instance.new("TextLabel")ba.Parent=game.CoreGui
+        ba.ZIndexBehavior=Enum.ZIndexBehavior.Sibling;ca.Parent=ba;ca.Active=true
+        ca.BackgroundColor3=Color3.new(0.176471,0.176471,0.176471)ca.Draggable=true
+        ca.Position=UDim2.new(0.698610067,0,0.098096624,0)ca.Size=UDim2.new(0,304,0,52)
+        ca.Font=Enum.Font.SourceSansSemibold;ca.Text="Anti Afk Kick Script"ca.TextColor3=Color3.new(0,1,1)
+        ca.TextSize=22;da.Parent=ca
+        da.BackgroundColor3=Color3.new(0.196078,0.196078,0.196078)da.Position=UDim2.new(0,0,1.0192306,0)
+        da.Size=UDim2.new(0,304,0,107)_b.Parent=da
+        _b.BackgroundColor3=Color3.new(0.176471,0.176471,0.176471)_b.Position=UDim2.new(0,0,0.800455689,0)
+        _b.Size=UDim2.new(0,304,0,21)_b.Font=Enum.Font.Arial;_b.Text="Made by Penguin"
+        _b.TextColor3=Color3.new(1,1,1)_b.TextSize=20;ab.Parent=da
+        ab.BackgroundColor3=Color3.new(0.176471,0.176471,0.176471)ab.Position=UDim2.new(0,0,0.158377379,0)
+        ab.Size=UDim2.new(0,304,0,44)ab.Font=Enum.Font.ArialBold;ab.Text="Status: Script Started"
+        ab.TextColor3=Color3.new(1,1,1)ab.TextSize=20;local bb=game:service'VirtualUser'
+        game:service'Players'.LocalPlayer.Idled:connect(function()
+            bb:CaptureController()bb:ClickButton2(Vector2.new())
+            ab.Text="You went idle and ROBLOX tried to kick you but we reflected it!"wait(2)ab.Text="Script Re-Enabled"end)
+  	end    
+})
+
+ScriptsTab:AddButton({
+	Name = "inf yield",
+	Callback = function(v)
+        loadstring(game:HttpGet(('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'),true))()
+  	end    
+})
+
+ScriptsTab:AddButton({
+	Name = "Straw HUB",
+	Callback = function(v)
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/vep1032/VepStuff/main/COBRA%20KAI%20KARATE%20%7C%20OPEN%20SOURCE%20GUI"))()
+    end    
+})
+
+ScriptsTab:AddButton({
+	Name = "Tea HUB",
+	Callback = function(v)
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/Aurelius0863/TeaHub/main/Loader.lua"))()
+    end    
+})
+
+ScriptsTab:AddButton({
+	Name = "Liok HUB",
+	Callback = function(v)
+        local discordinv = "https://discord.gg/G5yapQh7xP" local d local f = pcall(function() d = game:HttpGet("https://raw.githubusercontent.com/LioK251/Scripts/main/"..game.PlaceId..".lua") end) if f == true then loadstring(d)() else game.Players.LocalPlayer:Kick("Join Discord Server for the updates! Invite link is copied. "..discordinv) setclipboard(discordinv) end
+    end    
+})
+
+ScriptsTab:AddButton({
+	Name = "Penguin Stat Checker",
+	Callback = function(v)
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/Supertsj/penguin-stat-checker/main/penguin%20stat%20check?token=GHSAT0AAAAAABYJYDJIVJP6FVOCWNUWQ4RYYY5KN7Q"))()
+    end    
+})
+
+local CreditsTab = Window:MakeTab({
+	Name = "Credits",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+local MainSection = CreditsTab:AddSection({
+	Name = "Creator"
+})
+
+CreditsTab:AddLabel("Penguin")
+
+OrionLib:MakeNotification({
+	Name = "Nothing",
+	Content = "Made By Penguin",
+	Image = "rbxassetid://4483345998",
+	Time = 3
+})
+
+OrionLib:MakeNotification({
+	Name = "Something",
+	Content = "the X is to hide the ui :)",
+	Image = "rbxassetid://4483345998",
+	Time = 5
+})
+
+end
+OrionLib:Init()
